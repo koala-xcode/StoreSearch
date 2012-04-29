@@ -15,7 +15,6 @@
 		37260D4A154D215600CBA41A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37260D49154D215600CBA41A /* AppDelegate.m */; };
 		37260D4D154D215600CBA41A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37260D4C154D215600CBA41A /* ViewController.m */; };
 		37260D50154D215600CBA41A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37260D4E154D215600CBA41A /* ViewController.xib */; };
-		3765B5FD154D23DC007A59E3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765B5FC154D23DC007A59E3 /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +31,6 @@
 		37260D4B154D215600CBA41A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		37260D4C154D215600CBA41A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		37260D4F154D215600CBA41A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		3765B5FB154D23DC007A59E3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		3765B5FC154D23DC007A59E3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +83,6 @@
 				37260D4C154D215600CBA41A /* ViewController.m */,
 				37260D4E154D215600CBA41A /* ViewController.xib */,
 				37260D40154D215600CBA41A /* Supporting Files */,
-				3765B5FB154D23DC007A59E3 /* TestViewController.h */,
-				3765B5FC154D23DC007A59E3 /* TestViewController.m */,
 			);
 			path = StoreSearch;
 			sourceTree = "<group>";
@@ -169,7 +164,6 @@
 				37260D46154D215600CBA41A /* main.m in Sources */,
 				37260D4A154D215600CBA41A /* AppDelegate.m in Sources */,
 				37260D4D154D215600CBA41A /* ViewController.m in Sources */,
-				3765B5FD154D23DC007A59E3 /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
