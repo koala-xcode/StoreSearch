@@ -15,6 +15,7 @@
 		37260D4A154D215600CBA41A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37260D49154D215600CBA41A /* AppDelegate.m */; };
 		37260D4D154D215600CBA41A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37260D4C154D215600CBA41A /* ViewController.m */; };
 		37260D50154D215600CBA41A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37260D4E154D215600CBA41A /* ViewController.xib */; };
+		3765B5FD154D23DC007A59E3 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3765B5FC154D23DC007A59E3 /* TestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +23,17 @@
 		37260D39154D215600CBA41A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37260D3B154D215600CBA41A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		37260D3D154D215600CBA41A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		37260D41154D215600CBA41A /* StoreSearch-Info.plist */ = {isa = PBXFileReference; path = "StoreSearch-Info.plist"; sourceTree = "<group>"; };
+		37260D41154D215600CBA41A /* StoreSearch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "StoreSearch-Info.plist"; sourceTree = "<group>"; };
 		37260D43154D215600CBA41A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37260D45154D215600CBA41A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		37260D47154D215600CBA41A /* StoreSearch-Prefix.pch */ = {isa = PBXFileReference; path = "StoreSearch-Prefix.pch"; sourceTree = "<group>"; };
-		37260D48154D215600CBA41A /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		37260D47154D215600CBA41A /* StoreSearch-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreSearch-Prefix.pch"; sourceTree = "<group>"; };
+		37260D48154D215600CBA41A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		37260D49154D215600CBA41A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		37260D4B154D215600CBA41A /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		37260D4B154D215600CBA41A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		37260D4C154D215600CBA41A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		37260D4F154D215600CBA41A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		3765B5FB154D23DC007A59E3 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		3765B5FC154D23DC007A59E3 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 				37260D4C154D215600CBA41A /* ViewController.m */,
 				37260D4E154D215600CBA41A /* ViewController.xib */,
 				37260D40154D215600CBA41A /* Supporting Files */,
+				3765B5FB154D23DC007A59E3 /* TestViewController.h */,
+				3765B5FC154D23DC007A59E3 /* TestViewController.m */,
 			);
 			path = StoreSearch;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 				37260D46154D215600CBA41A /* main.m in Sources */,
 				37260D4A154D215600CBA41A /* AppDelegate.m in Sources */,
 				37260D4D154D215600CBA41A /* ViewController.m in Sources */,
+				3765B5FD154D23DC007A59E3 /* TestViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +281,7 @@
 				37260D55154D215600CBA41A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
