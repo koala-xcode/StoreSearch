@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3716706C1570BA1B00792F72 /* SearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3716706B1570BA1B00792F72 /* SearchResult.m */; };
 		37260D3A154D215600CBA41A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37260D39154D215600CBA41A /* UIKit.framework */; };
 		37260D3C154D215600CBA41A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37260D3B154D215600CBA41A /* Foundation.framework */; };
 		37260D3E154D215600CBA41A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37260D3D154D215600CBA41A /* CoreGraphics.framework */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3716706A1570BA1B00792F72 /* SearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResult.h; sourceTree = "<group>"; };
+		3716706B1570BA1B00792F72 /* SearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResult.m; sourceTree = "<group>"; };
 		37260D35154D215500CBA41A /* StoreSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37260D39154D215600CBA41A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37260D3B154D215600CBA41A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -28,7 +31,7 @@
 		37260D47154D215600CBA41A /* StoreSearch-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StoreSearch-Prefix.pch"; sourceTree = "<group>"; };
 		37260D48154D215600CBA41A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		37260D49154D215600CBA41A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		37260D4B154D215600CBA41A /* SearchViewController.h */ = {isa = PBXFileReference; path = SearchViewController.h; sourceTree = "<group>"; };
+		37260D4B154D215600CBA41A /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		37260D4C154D215600CBA41A /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		37260D4F154D215600CBA41A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SearchViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +84,8 @@
 				37260D49154D215600CBA41A /* AppDelegate.m */,
 				37260D4B154D215600CBA41A /* SearchViewController.h */,
 				37260D4C154D215600CBA41A /* SearchViewController.m */,
+				3716706A1570BA1B00792F72 /* SearchResult.h */,
+				3716706B1570BA1B00792F72 /* SearchResult.m */,
 				37260D4E154D215600CBA41A /* SearchViewController.xib */,
 				37260D40154D215600CBA41A /* Supporting Files */,
 			);
@@ -164,6 +169,7 @@
 				37260D46154D215600CBA41A /* main.m in Sources */,
 				37260D4A154D215600CBA41A /* AppDelegate.m in Sources */,
 				37260D4D154D215600CBA41A /* SearchViewController.m in Sources */,
+				3716706C1570BA1B00792F72 /* SearchResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
