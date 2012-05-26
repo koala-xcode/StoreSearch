@@ -9,5 +9,7 @@
 #import "SearchResult.h"
 
 @implementation SearchResult
+@synthesize artistName = _artistName;
+@synthesize name = _name;
 
 @end

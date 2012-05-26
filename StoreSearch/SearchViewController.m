@@ -7,6 +7,7 @@
 //
 
 #import "SearchViewController.h"
+#import "SearchResult.h"
 
 @interface SearchViewController ()
 @property (nonatomic, weak)IBOutlet UISearchBar *searchBar;
@@ -43,12 +44,38 @@
     if (searchResults == nil) {
         
         return 0;
+    } else if ([searchResults count] == 0)
+    {
+        
+        return 1;
+        
     } else {
         
         return [searchResults count];
         
     }
 }
+
+#pragma mark - UITableViewDelegate 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([searchResults count] == 0 ) {
+        
+        return nil;
+        
+    }else {
+        
+        return indexPath;
+    }
+    
+}
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -59,11 +86,23 @@
     
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     } 
-    cell.textLabel.text = [searchResults objectAtIndex:indexPath.row];
-    return cell;
     
+    if([searchResults count] == 0 ){
+        
+        cell.textLabel.text = @"Nothing Found";
+        cell.detailTextLabel.text = @"";
+    }
+    else {
+    
+    SearchResult *searchResult = [searchResults objectAtIndex:indexPath.row];
+    cell.textLabel.text = searchResult.name;
+    cell.detailTextLabel.text = searchResult.artistName;
+    
+    }
+    return cell;
+
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar 
@@ -72,9 +111,15 @@
     [searchBar resignFirstResponder];
     searchResults = [NSMutableArray arrayWithCapacity:10];
     
+    if (![searchBar.text isEqualToString:@"justin bieber"]) {
+    
     for (int i = 0; i < 3; i++) {
-        [searchResults addObject:[NSString stringWithFormat:@"Fake Result %d for '%@'", i , searchBar.text]];
+        SearchResult *searchResult = [[SearchResult alloc] init];
+        searchResult.name = [NSString stringWithFormat:@"Fake Result %d for", i];
+        searchResult.artistName = searchBar.text;
+        [searchResults addObject:searchResult];
         
+        }  
     }
     [self.tableView reloadData];
     
