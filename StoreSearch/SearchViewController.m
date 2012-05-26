@@ -6,8 +6,16 @@
 //  Copyright (c) 2012 KNS. All rights reserved.
 //
 
+
+
+
 #import "SearchViewController.h"
 #import "SearchResult.h"
+#import "SearchResultCell.h"
+
+
+static NSString *const SearchResultCellIdentifier = @"SearchResultCell";
+
 
 @interface SearchViewController ()
 @property (nonatomic, weak)IBOutlet UISearchBar *searchBar;
@@ -22,10 +30,15 @@
 @synthesize searchBar = _searchBar;
 @synthesize tableView = _tableView;
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    UINib *cellNib = [UINib nibWithNibName:SearchResultCellIdentifier bundle:nil];
+    [self.tableView registerNib:cellNib forCellReuseIdentifier:SearchResultCellIdentifier];
+    
+    self.tableView.rowHeight = 80;
 }
 
 - (void)viewDidUnload
@@ -77,32 +90,20 @@
 }
 
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    SearchResultCell *cell = (SearchResultCell *)[tableView dequeueReusableCellWithIdentifier:SearchResultCellIdentifier];
     
-    static NSString *CellIdentifier = @"SearchResultCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    } 
-    
-    if([searchResults count] == 0 ){
-        
-        cell.textLabel.text = @"Nothing Found";
-        cell.detailTextLabel.text = @"";
+    if ([searchResults count] == 0) {
+        cell.nameLabel.text = @"(Nothing found)";
+        cell.artistNameLabel.text = @"";
+    } else {
+        SearchResult *searchResult = [searchResults objectAtIndex:indexPath.row];
+        cell.nameLabel.text = searchResult.name;
+        cell.artistNameLabel.text = searchResult.artistName;
     }
-    else {
     
-    SearchResult *searchResult = [searchResults objectAtIndex:indexPath.row];
-    cell.textLabel.text = searchResult.name;
-    cell.detailTextLabel.text = searchResult.artistName;
-    
-    }
     return cell;
-
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar 
