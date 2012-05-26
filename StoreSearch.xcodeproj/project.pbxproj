@@ -64,12 +64,12 @@
 		3716708F1571231900792F72 /* SearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
 		3716709915712AD000792F72 /* SearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchResultCell.xib; path = ../SearchResultCell.xib; sourceTree = "<group>"; };
 		3716709B15713ABA00792F72 /* NothingFoundCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingFoundCell.xib; sourceTree = "<group>"; };
-		3716709D15713FBD00792F72 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		3716709F15713FC400792F72 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		371670A11571400C00792F72 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		371670A21571400C00792F72 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
-		371670A31571400C00792F72 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
-		371670A41571400C00792F72 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		3716709D15713FBD00792F72 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		3716709F15713FC400792F72 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		371670A11571400C00792F72 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../Icon-72.png"; sourceTree = "<group>"; };
+		371670A21571400C00792F72 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "../Icon-Small-50.png"; sourceTree = "<group>"; };
+		371670A31571400C00792F72 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "../Icon-Small.png"; sourceTree = "<group>"; };
+		371670A41571400C00792F72 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "../Icon-Small@2x.png"; sourceTree = "<group>"; };
 		37260D35154D215500CBA41A /* StoreSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StoreSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37260D39154D215600CBA41A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37260D3B154D215600CBA41A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,6 +102,12 @@
 		3716706D157117EF00792F72 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				371670A11571400C00792F72 /* Icon-72.png */,
+				371670A21571400C00792F72 /* Icon-Small-50.png */,
+				371670A31571400C00792F72 /* Icon-Small.png */,
+				371670A41571400C00792F72 /* Icon-Small@2x.png */,
+				3716709F15713FC400792F72 /* Icon@2x.png */,
+				3716709D15713FBD00792F72 /* Icon.png */,
 				3716706E157117EF00792F72 /* BarTexture.png */,
 				3716706F157117EF00792F72 /* BarTexture@2x.png */,
 				37167070157117EF00792F72 /* CloseButton.png */,
@@ -124,12 +130,6 @@
 		37260D2A154D215500CBA41A = {
 			isa = PBXGroup;
 			children = (
-				371670A11571400C00792F72 /* Icon-72.png */,
-				371670A21571400C00792F72 /* Icon-Small-50.png */,
-				371670A31571400C00792F72 /* Icon-Small.png */,
-				371670A41571400C00792F72 /* Icon-Small@2x.png */,
-				3716709F15713FC400792F72 /* Icon@2x.png */,
-				3716709D15713FBD00792F72 /* Icon.png */,
 				3716706D157117EF00792F72 /* Images */,
 				37260D3F154D215600CBA41A /* StoreSearch */,
 				37260D38154D215500CBA41A /* Frameworks */,
