@@ -9,10 +9,14 @@
 #import "SearchViewController.h"
 
 @interface SearchViewController ()
+@property (nonatomic, weak)IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak)IBOutlet UITableView *tableView;
 
 @end
 
 @implementation SearchViewController
+@synthesize searchBar = _searchBar;
+@synthesize tableView = _tableView;
 
 - (void)viewDidLoad
 {
