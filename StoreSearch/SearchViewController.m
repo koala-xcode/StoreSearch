@@ -15,6 +15,7 @@
 
 
 static NSString *const SearchResultCellIdentifier = @"SearchResultCell";
+static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
 
 
 @interface SearchViewController ()
@@ -38,7 +39,12 @@ static NSString *const SearchResultCellIdentifier = @"SearchResultCell";
     UINib *cellNib = [UINib nibWithNibName:SearchResultCellIdentifier bundle:nil];
     [self.tableView registerNib:cellNib forCellReuseIdentifier:SearchResultCellIdentifier];
     
+    cellNib = [UINib nibWithNibName:NothingFoundCellIdentifier bundle:nil];
+    [self.tableView registerNib:cellNib forCellReuseIdentifier:NothingFoundCellIdentifier];
+    
     self.tableView.rowHeight = 80;
+    
+    [self.searchBar becomeFirstResponder];
 }
 
 - (void)viewDidUnload
@@ -95,9 +101,12 @@ static NSString *const SearchResultCellIdentifier = @"SearchResultCell";
     SearchResultCell *cell = (SearchResultCell *)[tableView dequeueReusableCellWithIdentifier:SearchResultCellIdentifier];
     
     if ([searchResults count] == 0) {
-        cell.nameLabel.text = @"(Nothing found)";
-        cell.artistNameLabel.text = @"";
+       
+        return [tableView dequeueReusableCellWithIdentifier:NothingFoundCellIdentifier];
+        
     } else {
+        
+        SearchResultCell *cell = (SearchResultCell *)[tableView dequeueReusableCellWithIdentifier:SearchResultCellIdentifier];
         SearchResult *searchResult = [searchResults objectAtIndex:indexPath.row];
         cell.nameLabel.text = searchResult.name;
         cell.artistNameLabel.text = searchResult.artistName;
