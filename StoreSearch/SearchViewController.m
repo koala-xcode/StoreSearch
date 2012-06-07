@@ -58,6 +58,8 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
     if (searchResults == nil) {
@@ -74,6 +76,9 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
         
     }
 }
+ 
+
+
 
 #pragma mark - UITableViewDelegate 
 
@@ -98,40 +103,155 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SearchResultCell *cell = (SearchResultCell *)[tableView dequeueReusableCellWithIdentifier:SearchResultCellIdentifier];
-    
     if ([searchResults count] == 0) {
-       
         return [tableView dequeueReusableCellWithIdentifier:NothingFoundCellIdentifier];
-        
     } else {
-        
         SearchResultCell *cell = (SearchResultCell *)[tableView dequeueReusableCellWithIdentifier:SearchResultCellIdentifier];
+        
         SearchResult *searchResult = [searchResults objectAtIndex:indexPath.row];
         cell.nameLabel.text = searchResult.name;
-        cell.artistNameLabel.text = searchResult.artistName;
+        
+        NSString *artistName = searchResult.artistName;
+        if (artistName == nil) {
+            artistName = @"Unknown";
+        }
+        
+        NSString *kind = searchResult.kind;
+        cell.artistNameLabel.text = [NSString stringWithFormat:@"%@ (%@)", artistName, kind];
+        
+        return cell;
+    }
+}
+- (NSURL *)urlWithSearchText:(NSString *)searchText
+{
+    NSString *escapedSearchText = [searchText stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [NSString stringWithFormat:@"http://itunes.apple.com/search?term=%@", escapedSearchText];
+    NSURL *url = [NSURL URLWithString:urlString];
+    return url;
+}
+
+
+- (NSString *)performStoreRequestWithURL:(NSURL *)url
+{
+    NSError *error;
+    NSString *resultString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    
+    if(resultString == nil)
+    {
+        NSLog(@"Download Error:%@", error);
+        return nil;
+        
+    }
+    return resultString;
+    
+}
+
+-(void)showNetworkError
+{
+    UIAlertView *alertView =[[UIAlertView alloc]
+                             initWithTitle:@"Whoops..." message:@"There was an error reading from the iTunes Store" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    
+    
+}
+
+-(SearchResult *)parseTrack:(NSDictionary *)dictionary
+{
+    SearchResult *searchResult = [[SearchResult alloc] init];
+    searchResult.name = [dictionary objectForKey:@"trackName"];
+    searchResult.artistName = [dictionary objectForKey:@"artistName"];
+    searchResult.artworkURL60 = [dictionary objectForKey:@"artworkUrl60"];
+    searchResult.artworkURL100 = [dictionary objectForKey:@"artworkUrl100"];
+    searchResult.storeURL = [dictionary objectForKey:@"trackViewUrl"];
+    searchResult.kind = [dictionary objectForKey:@"kind"];
+    searchResult.price = [dictionary objectForKey:@"trackPrice"];
+    searchResult.currency = [dictionary objectForKey:@"currency"];
+    searchResult.genre = [dictionary objectForKey:@"primaryGenreName"];
+    
+    return searchResult;
+                                  
+    
+    
+}
+
+
+
+-(void)parseDictionary:(NSDictionary *)dictionary
+{
+    NSArray *array = [dictionary objectForKey:@"results"];
+    
+    if (array == nil) {
+        
+        NSLog(@"Expected 'results' array");
+              return;
+        
+    }
+              
+    for (NSDictionary *resultDict in array) {
+        
+        SearchResult *searchResult;
+        
+        NSString *wrapperType = [resultDict objectForKey:@"wrapperType"];
+        
+        if ([wrapperType isEqualToString:@"track"]) {
+            searchResult = [self parseTrack:resultDict];
+        }
+        
+        if (searchResult != nil) {
+            [searchResults addObject:searchResult];
+        }
+    }    
+    
+}
+
+
+
+-(NSDictionary *)parseJSON:(NSString *)jsonString
+{
+    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error;
+    id resultObject = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+ 
+    if(resultObject == nil) {
+        
+        [self showNetworkError];
+        return nil;
     }
     
-    return cell;
+    if (![resultObject isKindOfClass:[NSDictionary class]]) {
+        
+        [self showNetworkError];
+        return nil;
+    }
+        
+    return resultObject;
 }
+
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar 
 {
     
-    [searchBar resignFirstResponder];
-    searchResults = [NSMutableArray arrayWithCapacity:10];
-    
-    if (![searchBar.text isEqualToString:@"justin bieber"]) {
-    
-    for (int i = 0; i < 3; i++) {
-        SearchResult *searchResult = [[SearchResult alloc] init];
-        searchResult.name = [NSString stringWithFormat:@"Fake Result %d for", i];
-        searchResult.artistName = searchBar.text;
-        [searchResults addObject:searchResult];
+    if ([searchBar.text length] > 0) {
+        [searchBar resignFirstResponder];
         
-        }  
+        searchResults = [NSMutableArray arrayWithCapacity:10];
+        
+        NSURL *url = [self urlWithSearchText:searchBar.text];
+        
+        NSLog(@"URL '%@'", url);
+        
+        NSString *jsonString = [self performStoreRequestWithURL:url];
+        NSLog(@"Received JSON String '%@'",jsonString);
+        
+        NSDictionary *dictionary = [self parseJSON:jsonString];
+        NSLog(@"Dictionary '%@'", dictionary);
+        
+        [self parseDictionary:dictionary];
+        
+        [self.tableView reloadData];
     }
-    [self.tableView reloadData];
+    
     
 }
 
