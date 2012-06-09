@@ -100,6 +100,39 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
     
 }
 
+- (NSString *)kindForDisplay:(NSString *) kind 
+{
+    if([kind isEqualToString:@"album"]) {
+        return @"Album";
+    }else if ([kind isEqualToString:@"audiobook"]) {
+        return @"Audio Book";
+    }else if ([kind isEqualToString:@"book"]) {
+        return @"Book";
+    }else if ([kind isEqualToString:@"ebook"]) {
+        return @"E-Book";
+    }else if ([kind isEqualToString:@"feature-movie"]) {
+        return @"Movie";
+    }else if ([kind isEqualToString:@"music-video"]) {
+        return @"Music Video";
+    }else if ([kind isEqualToString:@"podcast"]) {
+        return @"Podcast";
+    }else if ([kind isEqualToString:@"software"]) {
+        return @"App";
+    }else if ([kind isEqualToString:@"song"]) {
+        return @"Song";
+    }else if ([kind isEqualToString:@"tv-episode"]) {
+        return @"TV Episode";
+    }else {
+        return kind;
+    }
+               
+    
+    
+}
+
+
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -116,7 +149,7 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
             artistName = @"Unknown";
         }
         
-        NSString *kind = searchResult.kind;
+        NSString *kind = [self kindForDisplay:searchResult.kind];
         cell.artistNameLabel.text = [NSString stringWithFormat:@"%@ (%@)", artistName, kind];
         
         return cell;
@@ -171,8 +204,63 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
     return searchResult;
                                   
     
+}
+
+
+- (SearchResult *)parseAudioBook:(NSDictionary *)dictionary 
+{
+    SearchResult *searchResult = [[SearchResult alloc] init];
+    searchResult.name = [dictionary objectForKey:@"collectionName"];
+    searchResult.artistName = [dictionary objectForKey:@"artistName"];
+    searchResult.artworkURL60 = [dictionary objectForKey:@"artworkUrl60"];
+    searchResult.artworkURL100 = [dictionary objectForKey:@"artworkUrl100"];
+    searchResult.storeURL = [dictionary objectForKey:@"collectionViewUrl"];
+    searchResult.kind = @"audiobook";
+    searchResult.price = [dictionary objectForKey:@"collectionPrice"];
+    searchResult.currency = [dictionary objectForKey:@"currency"];
+    searchResult.genre = [dictionary objectForKey:@"primaryGenreName"];
+    return searchResult;
+    
     
 }
+
+
+- (SearchResult *)parseSoftware:(NSDictionary *)dictionary 
+
+{
+    SearchResult *searchResult = [[SearchResult alloc] init];
+    searchResult.name = [dictionary objectForKey:@"trackName"];
+    searchResult.artistName = [dictionary objectForKey:@"artistName"];
+    searchResult.artworkURL60 = [dictionary objectForKey:@"artworkUrl60"];
+    searchResult.artworkURL100 = [dictionary objectForKey:@"artworkUrl100"];
+    searchResult.storeURL = [dictionary objectForKey:@"trackViewUrl"];
+    searchResult.kind = [dictionary objectForKey:@"kind"];
+    searchResult.price = [dictionary objectForKey:@"price"];
+    searchResult.currency = [dictionary objectForKey:@"currency"];
+    searchResult.genre = [dictionary objectForKey:@"primaryGenreName"];
+    return searchResult;
+
+}
+
+- (SearchResult *)parseEBook:(NSDictionary *)dictionary 
+
+{
+    SearchResult *searchResult = [[SearchResult alloc] init];
+    searchResult.name = [dictionary objectForKey:@"trackName"];
+    searchResult.artistName = [dictionary objectForKey:@"artistName"];
+    searchResult.artworkURL60 = [dictionary objectForKey:@"artworkUrl60"];
+    searchResult.artworkURL100 = [dictionary objectForKey:@"artworkUrl100"];
+    searchResult.storeURL = [dictionary objectForKey:@"trackViewUrl"];
+    searchResult.kind = [dictionary objectForKey:@"kind"];
+    searchResult.price = [dictionary objectForKey:@"price"];
+    searchResult.currency = [dictionary objectForKey:@"currency"];
+    searchResult.genre = [(NSArray *)[dictionary objectForKey:@"genres"] componentsJoinedByString:@", "];
+    return searchResult;
+    
+}
+
+
+
 
 
 
@@ -192,15 +280,22 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
         SearchResult *searchResult;
         
         NSString *wrapperType = [resultDict objectForKey:@"wrapperType"];
+        NSString *kind = [resultDict objectForKey:@"kind"];
         
         if ([wrapperType isEqualToString:@"track"]) {
             searchResult = [self parseTrack:resultDict];
+        } else if ([wrapperType isEqualToString:@"audiobook"]) {
+            searchResult = [self parseAudioBook:resultDict];
+        } else if ([wrapperType isEqualToString:@"software"]) {
+            searchResult = [self parseSoftware:resultDict];
+        } else if ([kind isEqualToString:@"ebook"]) {
+            searchResult = [self parseEBook:resultDict];
         }
         
         if (searchResult != nil) {
             [searchResults addObject:searchResult];
         }
-    }    
+    }  
     
 }
 
@@ -229,6 +324,8 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
 }
 
 
+
+
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar 
 {
     
@@ -248,12 +345,14 @@ static NSString *const NothingFoundCellIdentifier = @"NothingFoundCell";
         NSLog(@"Dictionary '%@'", dictionary);
         
         [self parseDictionary:dictionary];
+        [searchResults sortUsingSelector:@selector(compareName:)];
         
         [self.tableView reloadData];
     }
     
     
 }
+
 
 
 
